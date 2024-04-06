@@ -1,0 +1,30 @@
+
+let SNToHostnameDict = newDict()
+let dataDeviceAnalytics = `analytics:/Devices/*/versioned-data/Device`
+for device, deviceData in dataDeviceAnalytics {
+   let mergedDeviceData = merge(deviceData)
+   SNToHostnameDict[device] = mergedDeviceData["hostname"]
+}
+
+
+let data=`*:/Sysdb/bridging/config/vlanConfig/*`
+let swlist = newDict()
+let res = newDict()
+
+for key, sw in data{
+   swlist[key] = data[key]
+}
+
+let i = 0
+for key, sw in swlist{
+    for vlan in sw{
+    if dictHasKey(  vlan[0], "configuredName"){
+        if (!strContains(vlan[0]["configuredName"], "Ethernet")) {
+            let deviceHostname = SNToHostnameDict[key]
+            res[i] = newDict() | setFields("SW_NAME", deviceHostname, "VLAN_ID", vlan[0]["name"], "VLAN_NAME", vlan[0]["configuredName"])
+            let i = i + 1
+  
+    }
+    }
+}}
+res

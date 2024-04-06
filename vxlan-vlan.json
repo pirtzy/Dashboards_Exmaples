@@ -1,0 +1,90 @@
+{
+  "dashboards": [
+    {
+      "key": "fd846b03-6905-4b5d-bf1e-092c22faa2e4",
+      "createdAt": [
+        742711592,
+        1586
+      ],
+      "createdBy": "cvpuser",
+      "metaData": {
+        "schemaVersion": "3",
+        "legacyKey": "",
+        "legacyVersion": "",
+        "fromPackage": ""
+      },
+      "name": "VLAN/VXLAN Dashboard (EOS+)",
+      "description": "#vlan #vxlan #vtep #vni",
+      "widgets": [
+        {
+          "id": "d207ff16-d8bc-4987-ae22-637fdcb2ac6d",
+          "name": "",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "dimensions": {
+            "width": 24,
+            "height": 12
+          },
+          "type": "metrics-widget-table",
+          "inputs": {
+            "defaultSort": {
+              "order": 1
+            },
+            "components": [],
+            "isTokenSearchEnabled": true,
+            "metricKeys": [
+              "DEVICE_SVI_COUNT",
+              "DEVICE_VXLAN_COUNT",
+              "LAG_MLAG_STATUS",
+              "LAG_MLAG_PEER_LINK_STATUS",
+              "VLANS_CONFIGURED",
+              "VLANS_TOTAL_CONFIGURED_COUNT",
+              "VXLAN_VNIS_COUNT"
+            ],
+            "metricSource": "devices",
+            "selectedCustomTags": [
+              "NetworkType"
+            ],
+            "tags": "",
+            "viewType": "metric"
+          },
+          "location": "main",
+          "styles": {
+            "hideTitle": false,
+            "backgroundColor": "",
+            "hideHorizontalBar": false,
+            "titleSize": 14
+          },
+          "parent": ""
+        },
+        {
+          "id": "505fc882-1457-46c0-b1df-53e6567faa9a",
+          "name": "",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "dimensions": {
+            "width": 5,
+            "height": 2
+          },
+          "type": "input-widget",
+          "inputs": {
+            "defaultValue": "",
+            "inputName": "NetworkType",
+            "inputSource": "devices",
+            "selectedCustomTags": [],
+            "tagLabel": "Network-Type",
+            "tags": ""
+          },
+          "location": "inputs",
+          "parent": ""
+        }
+      ],
+      "lastUpdated": 1703777932992,
+      "lastUpdatedBy": "cvpuser"
+    }
+  ]
+}
