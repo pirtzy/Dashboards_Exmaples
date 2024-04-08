@@ -1,0 +1,43 @@
+{
+  "dashboards": [
+    {
+      "key": "017d56c0-70aa-4735-942b-26467e204305",
+      "createdAt": [
+        875513170,
+        1594
+      ],
+      "createdBy": "arista",
+      "metaData": {
+        "schemaVersion": "3",
+        "legacyKey": "",
+        "legacyVersion": "",
+        "fromPackage": ""
+      },
+      "name": "List All Vlans In system",
+      "description": "",
+      "widgets": [
+        {
+          "id": "b6fd374f-8a44-45d1-a430-318b2ec993dd",
+          "name": "",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "dimensions": {
+            "width": 22,
+            "height": 22
+          },
+          "type": "aql-query-widget",
+          "inputs": {
+            "expression": "\r\nlet SNToHostnameDict = newDict()\r\nlet dataDeviceAnalytics = `analytics:/Devices/*/versioned-data/Device`\r\nfor device, deviceData in dataDeviceAnalytics {\r\n   let mergedDeviceData = merge(deviceData)\r\n   SNToHostnameDict[device] = mergedDeviceData[\"hostname\"]\r\n}\r\n\r\n\r\nlet data=`*:/Sysdb/bridging/config/vlanConfig/*`\r\nlet swlist = newDict()\r\nlet res = newDict()\r\n\r\nfor key, sw in data{\r\n   swlist[key] = data[key]\r\n}\r\n\r\nlet i = 0\r\nfor key, sw in swlist{\r\n    for vlan in sw{\r\n    if dictHasKey(  vlan[0], \"configuredName\"){\r\n        if (!strContains(vlan[0][\"configuredName\"], \"Ethernet\")) {\r\n            let deviceHostname = SNToHostnameDict[key]\r\n            res[i] = newDict() | setFields(\"SW_NAME\", deviceHostname, \"VLAN_ID\", vlan[0][\"name\"], \"VLAN_NAME\", vlan[0][\"configuredName\"])\r\n            let i = i + 1\r\n  \r\n    }\r\n    }\r\n}}\r\nres",
+            "visualization": "table"
+          },
+          "location": "main",
+          "parent": ""
+        }
+      ],
+      "lastUpdated": 1712420012531,
+      "lastUpdatedBy": "arista"
+    }
+  ]
+}
